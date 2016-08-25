@@ -1,1 +1,19 @@
-body {font-family: Arial;background: #ccc;width:500px;height: 400px;}
+body {
+	font-family: 'Quicksand', Arial;
+	background: #F2F2F2;
+	color:#00001f;
+	width:500px;
+	height: auto;
+	padding: 0px;
+    margin: 0px;
+}
+
+.main {
+
+}
+
+.footer {
+	background: -webkit-linear-gradient(top, rgba(149,149,149,1) 0%,rgba(13,13,13,1) 46%,rgba(1,1,1,1) 50%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(27,27,27,1) 100%);
+    color: #fff;
+    padding: 20px;
+}
