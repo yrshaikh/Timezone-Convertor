@@ -1,15 +1,43 @@
   <html>
   <head>
 	<script src="popup.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css"><link>
   </head>
 	<body>
-		<h2>Timezone Convertor - beta</h2>
+		<div class="head">
+			<div class="title">Timezone Convertor</div>
+			<div class="add black-border">
+				<img src="icons/add-plus-button.png" />
+			</div>
+		</div>
 		<div class="main">
+			<div class="item">
+				<span class="part1">
+					<span class="title">IST</span>
+					<span class="desc">Indian Standard Time</span>	
+					<span class="desc">GMT + 5:30</span>
+				</span>
+				<span class="part3">
+					<span class="time" contenteditable>5:30 PM</span>
+				</span>
+			</div>
+			<div class="item">
+				<span class="part1">
+					<span class="title">PST </span>
+					<span class="desc">Pacific Standard Time</span>	
+					<span class="desc">GMT -8:00</span>
+				</span>
+				<span class="part3">
+					<span class="time" contenteditable>10:45 AM</span>
+				</span>
+			</div>
 		</div>
 		<div class="footer">
-			hello footer
+			<div class="type black-border">
+				<span class="selected pull-left">AM/PM</span>
+				<span class="pull-left">24-Hours</span>
+			</div>
 		</div>
 	</body>
 </html>
