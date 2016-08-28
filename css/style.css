@@ -48,9 +48,16 @@ input:hover{outline:none;}
 }
 
 .main .item .part1 .desc {
-	color:#676E79;
-	display: block;
-	font-size: 13px;
+  color:#676E79;
+  display: block;
+  font-size: 13px;
+}
+
+.main .item .part1 .delete {
+	color:#EC4989;
+  text-decoration: underline;
+  font-style: italic;
+  cursor: pointer;
 }
 
 .main .item .part3 .time {
