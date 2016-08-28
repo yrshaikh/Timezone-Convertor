@@ -7,7 +7,7 @@
    "description": "The timezone convertor you had been waiting for ;)",   
    "manifest_version": 2,
    "name": "Timezone Convertor",
-   "permissions": [ "tabs", "http://*/*", "https://*/*" ],
+   "permissions": [ "storage", "tabs", "http://*/*", "https://*/*" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "1.1"
 }
