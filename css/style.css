@@ -1,25 +1,16 @@
 body {
-<<<<<<< HEAD
-=======
 	font-family: 'Montserrat', Arial;
->>>>>>> master
 	background: #666C80;
 	color:#00001f;
 	width:500px;
 	height: auto;
 	padding: 0px;
-<<<<<<< HEAD
   margin: 0px;
 }
 
 body, #search {font-family: 'Montserrat', Arial;}
 input:hover{outline:none;}
 
-=======
-    margin: 0px;
-}
-
->>>>>>> master
 .pull-left {float: left;}
 .pull-right {float: right;}
 .black-border {
@@ -86,7 +77,6 @@ input:hover{outline:none;}
 	top:16px;
 }
 
-<<<<<<< HEAD
 .head .add:hover {
 	background: #6f6969;
 }
@@ -95,8 +85,6 @@ input:hover{outline:none;}
     cursor: pointer;
 }
 
-=======
->>>>>>> master
 .head .add img {height: 16px;}
 
 .head, .footer {
@@ -120,9 +108,8 @@ input:hover{outline:none;}
 	float: left;
 	text-align: center;
 	width: 50%;	
-    padding: 10px 0px 10px 0px;
-<<<<<<< HEAD
-    color:#777;
+  padding: 10px 0px 10px 0px;
+  color:#777;
 }
 
 .footer .type span:hover {	
@@ -208,10 +195,7 @@ input:hover{outline:none;}
     border: 0px;
   	border-top: 1px solid #A8ADB4;
   }
-=======
-}
 
 .footer .type .selected {
 	background:#434343
 }
->>>>>>> master
