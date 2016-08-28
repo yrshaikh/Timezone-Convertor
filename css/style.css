@@ -4,10 +4,11 @@ body {
 	width:500px;
 	height: auto;
 	padding: 0px;
-    margin: 0px;
+  margin: 0px;
 }
 
 body, #search {font-family: 'Montserrat', Arial;}
+input:hover{outline:none;}
 
 .pull-left {float: left;}
 .pull-right {float: right;}
