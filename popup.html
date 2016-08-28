@@ -1,7 +1,5 @@
   <html ng-app="timezoneApp">
   <head>
-	<script type="text/javascript" src="/js/app/bpopup.js"></script>
-	<script type="text/javascript" src="/js/lib/angular.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/style.css"><link>
   </head>
@@ -17,7 +15,7 @@
 			<div class="container-fluid typeahead-demo">			    
 			    <input id="search" type="text" ng-model="selected" placeholder="Add Time Zone, City or Town" uib-typeahead="tz as tz.Name for tz in getTimeZone($viewValue)" typeahead-popup-template-url="template.html" class="form-control">
 			</div>
-			<div ng-repeat="item in selectedTimezones" class="item">
+			<div ng-repeat="item in selectedTimezones track by $index" class="item">
 				<span class="part1">
 					<span class="title">{{item.Abbreviation}}</span>
 					<span class="desc">{{item.Name}}</span>	

@@ -2,10 +2,10 @@ angular.module('timezoneApp').controller('mainController', [
     "$scope", "storageService", "searchService", function ($scope, storageService, searchService) {
 
     constructor  = function(){
-        storageService.get()
+        storageService.get("timezoneList")
             .then(function(data){
-                var previouslyAddedTimezones = data;
-                console.log("previouslyAddedTimezones", data);
+                var previouslyAddedTimezones = data.timezoneList;
+                console.log("previouslyAddedTimezones", previouslyAddedTimezones);
 
                 $scope.selectedTimezones = [];
                 var utcDate = moment().utc();
@@ -38,6 +38,7 @@ angular.module('timezoneApp').controller('mainController', [
         }
     });
     $scope.storage.findAll(function(data){
+        console.log("findAllTimZon", data);
         $scope.timezoneList = data;
         $scope.$apply();
     });
