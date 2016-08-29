@@ -48,8 +48,8 @@ input:hover{outline:none;}
 }
 
 .main .item .part3 .clock .unit{
-  width: 50px;
-  padding: 10px 10px;
+  width: 60px;
+  padding: 10px 5px;
   font-family: 'Montserrat', Arial;
   font-size: 20px;
   text-align: center;
@@ -193,20 +193,24 @@ input:hover{outline:none;}
     list-style: none;    
   }
 
-  .custom-popup-wrapper ul li a:hover {
+  .custom-popup-wrapper ul li a:hover, .uib-typeahead-match.active {
     background: #EC4989;
+    color:#fff !important;
+  }
+
+  .uib-typeahead-match.active a {
     color:#fff !important;
   }
 
   .custom-popup-wrapper ul li a{
     text-decoration: none;    
-        font-size: 14px;
-        display: block;
-        padding-left: 22px;
+    font-size: 14px;
+    display: block;
+    padding-left: 22px;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 10px;
-        color:#555;
+    color:#555;
   }
 
   .custom-popup-wrapper ul li a strong {

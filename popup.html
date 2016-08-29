@@ -22,14 +22,14 @@
 					<span ng-click="remove(item);" class="delete" ng-if="$index != 0">remove</span>
 				</span>
 				<span class="part3">
-					<span ng-hide="item.edit == true" class="time" contenteditable>{{item.Display}}</span>
+					<span ng-hide="item.edit == true" class="time">{{item.Display}}</span>
 					<span class="clock" ng-show="item.edit == true">
-						<input class="unit" type="text" />
-						<input class="unit" type="text" />
-						<input class="unit" type="text" />
+						<input class="unit" type="text" ng-model="item.editObject.hour" />
+						<input class="unit" type="text" ng-model="item.editObject.minute" />
+						<input class="unit" type="text" ng-model="item.editObject.a" />
 					</span>
-					<span ng-show="!item.edit || item.edit == false" class="edit" ng-click="item.edit = true;">edit</span>
-					<span ng-show="item.edit == true" class="edit" ng-click="item.edit = false;">save</span>
+					<span ng-show="!item.edit || item.edit == false" class="edit" ng-click="edit(item)">edit</span>
+					<span ng-show="item.edit == true" class="edit" ng-click="save(item)">save</span>
 				</span>				
 			</div>
 		</div>
