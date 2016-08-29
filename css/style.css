@@ -1,6 +1,6 @@
 body {
 	font-family: 'Montserrat', Arial;
-	background: #666C80;
+	background: #505050;
 	color:#00001f;
 	width:500px;
 	height: auto;
@@ -54,10 +54,14 @@ input:hover{outline:none;}
 }
 
 .main .item .part1 .delete {
-	color:#EC4989;
+	color:#999;
   text-decoration: underline;
   font-style: italic;
   cursor: pointer;
+}
+
+.main .item .part1 .delete:hover {
+  color:#EC4989;
 }
 
 .main .item .part3 .time {
