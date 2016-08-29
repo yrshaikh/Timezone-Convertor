@@ -1,65 +1,40 @@
 angular.module('timezoneApp').service('storageService', function ($q) {
-    var _this = this;
+    var that = this;
     this.data = [];
-    this.key = "timezoneList";
     this.deferred = $q.defer();
-    this.findAll = function(callback) {
-        chrome.storage.sync.get('todo', function(keys) {
-            if (keys.todo != null) {
-                _this.data = keys.todo;
-                for (var i=0; i<_this.data.length; i++) {
-                    _this.data[i]['id'] = i + 1;
-                }
-                console.log("findall", _this.data);
-                callback(_this.data);
-            }
-        });
-    }
-    this.sync = function() {
-        chrome.storage.sync.set({'timezoneList': this.data}, function() {
-            console.log('syn callback');
-        });
-    }
-    this.add = function (item) {
-        this.data.push(item);
-        this.sync();
-    }
-    this.remove = function(item) {
-        this.data.splice(this.data.indexOf(item), 1);
-        this.sync();
-    }
-    this.removeAll = function() {
-        this.data = [];
-        this.sync();
-    },
     this.set = function(value) {
-        this.get(this.key)
+        this.get()
             .then(function(data){
-                data = data.timezoneList;
-                var finalData = [];
-                console.log(data.length);
-                if(data.length){
-                    finalData = data;
+                var timeZoneListToSet = [];
+                if(data && data.timezone && Array.isArray(data.timezone)){
+                    timeZoneListToSet = data.timezone;
                 }
-                else{
-                    finalData.push(data);
-                }
-                finalData.push(value);
-                var data = {};
-                data[_this.key] = finalData;
-                console.log("set", data);
-                chrome.storage.local.set(data, function() {
-                    _this.deferred.resolve({});
+                timeZoneListToSet.push(value);
+                chrome.storage.local.set({ "timezone" : timeZoneListToSet }, function() {
+                    that.deferred.resolve({});
                 });
-                return _this.deferred.promise;
+                return that.deferred.promise;
             });
         
     },
-    this.get = function(key) {
-        chrome.storage.local.get(key, function(data) {
-            console.log("get",data);
-            _this.deferred.resolve(data);
+    this.get = function() {
+        chrome.storage.local.get("timezone", function(data) {
+            that.deferred.resolve(data);
         });
         return this.deferred.promise;
+    },
+    this.remove = function(timezone){
+        this.get()
+            .then(function(data){
+                if(data && data.timezone && Array.isArray(data.timezone)){
+                    data.timezone = _.reject(data.timezone, function(item) {            
+                        return item.Id === timezone.Id;
+                    });
+                }
+                chrome.storage.local.set({ "timezone" : data.timezone }, function() {
+                    that.deferred.resolve({});
+                });
+                return that.deferred.promise;
+            });
     }
 });

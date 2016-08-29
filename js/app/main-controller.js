@@ -1,15 +1,13 @@
 angular.module('timezoneApp').controller('mainController', [
     "$scope", "storageService", "searchService", function ($scope, storageService, searchService) {
-
     constructor  = function(){
-        storageService.get("timezoneList")
+        $scope.timeformat='ampm';
+        storageService.get()
             .then(function(data){
-                var previouslyAddedTimezones = data.timezoneList;
-                console.log("previouslyAddedTimezones", previouslyAddedTimezones);
-
+                var previouslyAddedTimezones = data.timezone;
                 $scope.selectedTimezones = [];
                 var utcDate = moment().utc();
-                var utcDisplay = moment().utc().format('h:mm a');
+                var utcDisplay = moment().utc().format('h:mm A');
                 $scope.utc = { Id: "utc", Abbreviation: "UTC", Name: "Universal Time Coordinated", Offset: 0, Date: utcDate, Display:  utcDisplay};
                 $scope.selectedTimezones.push($scope.utc);
                 if(previouslyAddedTimezones){
@@ -17,8 +15,7 @@ angular.module('timezoneApp').controller('mainController', [
                         if(item.Id){
                             $scope.selectedTimezones.push(item);
                         }
-                    });
-                    
+                    });                    
                 }
                 $scope.selected = null;
             });
@@ -31,16 +28,11 @@ angular.module('timezoneApp').controller('mainController', [
     $scope.$watch('selected', function(newValue, oldValue) {
         if(newValue && newValue["Abbreviation"]){
             newValue.Date = moment($scope.utc.Date).add('hours', newValue.Offset);
-            newValue.Display = moment(newValue.Date).format('h:mm a');
+            newValue.Display = moment(newValue.Date).format('h:mm A');
             storageService.set(newValue);
             $scope.selectedTimezones.push(newValue);
             $scope.selected = null;
         }
-    });
-    $scope.storage.findAll(function(data){
-        console.log("findAllTimZon", data);
-        $scope.timezoneList = data;
-        $scope.$apply();
     });
     $scope.remove = function(timezone) {
         $scope.selectedTimezones = _.reject($scope.selectedTimezones, function(item) {
@@ -49,14 +41,11 @@ angular.module('timezoneApp').controller('mainController', [
         });
         storageService.remove(timezone);
     }
-    $scope.removeAll = function() {
-        storageService.removeAll();
-    }
-    $scope.toggleCompleted = function() {
-        storageService.sync();
-    }
     $scope.getTimeZone = function(searchTerm) {
         return searchService.dataSearch(searchTerm);
+    }
+    $scope.edit = function(timezone){
+        timezone.edit = true;
     }
 
     constructor();

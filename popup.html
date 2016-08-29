@@ -1,7 +1,7 @@
   <html ng-app="timezoneApp">
   <head>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/css/style.css"><link>
+	<link rel="stylesheet" type="text/css" href="./css/style.css"><link>
   </head>
 	<body ng-controller="mainController">
 		<div class="head">
@@ -11,7 +11,6 @@
 			</div>			
 		</div>
 		<div class="main">
-			<!--<pre>Model: {{selected | json}}</pre>-->
 			<div class="container-fluid typeahead-demo">			    
 			    <input id="search" type="text" ng-model="selected" placeholder="Add Time Zone, City or Town" uib-typeahead="tz as tz.Name for tz in getTimeZone($viewValue)" typeahead-popup-template-url="template.html" class="form-control">
 			</div>
@@ -23,14 +22,21 @@
 					<span ng-click="remove(item);" class="delete" ng-if="$index != 0">remove</span>
 				</span>
 				<span class="part3">
-					<span class="time" contenteditable>{{item.Display}}</span>					
+					<span ng-hide="item.edit == true" class="time" contenteditable>{{item.Display}}</span>
+					<span class="clock" ng-show="item.edit == true">
+						<input class="unit" type="text" />
+						<input class="unit" type="text" />
+						<input class="unit" type="text" />
+					</span>
+					<span ng-show="!item.edit || item.edit == false" class="edit" ng-click="item.edit = true;">edit</span>
+					<span ng-show="item.edit == true" class="edit" ng-click="item.edit = false;">save</span>
 				</span>				
 			</div>
 		</div>
 		<div class="footer">
 			<div class="type black-border">
-				<span class="selected pull-left">AM/PM</span>
-				<span class="pull-left">24-Hours</span>
+				<span ng-class="{selected: timeformat=='ampm'}" class="selected pull-left" ng-click="timeformat='ampm';">AM/PM</span>
+				<span ng-class="{selected: timeformat=='24hr'}" class="pull-left" ng-click="timeformat='24hr';">24-Hours</span>
 			</div>
 			<div class="notes">
 				<a href="https://github.com/yrshaikh/Timezone-Convertor">Homepage</a> |
