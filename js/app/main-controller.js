@@ -2,6 +2,7 @@ angular.module('timezoneApp').controller('mainController', [
     "$scope", "storageService", "searchService", function ($scope, storageService, searchService) {
     constructor  = function(){
         $scope.timeformat='ampm';
+        //$scope.inputValid = true;
         storageService.get()
             .then(function(data){
                 var previouslyAddedTimezones = data.timezone;

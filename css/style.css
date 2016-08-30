@@ -47,12 +47,17 @@ input:hover{outline:none;}
   display: block;
 }
 
-.main .item .part3 .clock .unit{
+.main .item .part3 .clock .unit,
+.main .item .part3 .clock .tf{
   width: 60px;
   padding: 10px 5px;
   font-family: 'Montserrat', Arial;
   font-size: 20px;
   text-align: center;
+}
+
+.main .item .part3 .clock .tf{
+  width: 10px;
 }
 
 .main .item .part1 .title {
