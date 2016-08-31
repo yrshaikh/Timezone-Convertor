@@ -26,9 +26,15 @@
 					<span class="clock" ng-show="item.edit == true">
 						<input class="unit" type="text" ng-model="item.editObject.hour" />
 						<input class="unit" type="text" ng-model="item.editObject.minute" />
-						<span ng-if="timeformat=='ampm'">
-							<input class="tf" name="tf" value="AM" type="radio" ng-model="item.editObject.a"  /> AM
-							<input class="tf" name="tf" value="PM" type="radio" ng-model="item.editObject.a"  /> PM
+						<span class="" ng-if="timeformat=='ampm'">
+							<span class="tf am">
+	  							<input id="am" name="tf" value="AM" type="radio" ng-model="item.editObject.a" />
+	  							<label for="am">AM</label>
+							</span>
+							<span class="tf pm">
+	  							<input id="pm" name="tf" value="PM" type="radio" ng-model="item.editObject.a" />	
+								<label for="pm">PM</label>
+							</span>
 						</span>
 					</span>
 					<span ng-show="!item.edit || item.edit == false" class="edit" ng-click="edit(item)">edit</span>

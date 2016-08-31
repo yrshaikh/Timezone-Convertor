@@ -13,6 +13,8 @@ input:hover{outline:none;}
 
 .pull-left {float: left;}
 .pull-right {float: right;}
+.posrel {position: relative;}
+.posabs {position: absolute;}
 .black-border {
 	border:1px solid #232323;
 	border-radius: 3px;
@@ -47,8 +49,8 @@ input:hover{outline:none;}
   display: block;
 }
 
-.main .item .part3 .clock .unit,
-.main .item .part3 .clock .tf{
+.main .item .part3 .clock .unit
+{
   width: 60px;
   padding: 10px 5px;
   font-family: 'Montserrat', Arial;
@@ -58,7 +60,18 @@ input:hover{outline:none;}
 
 .main .item .part3 .clock .tf{
   width: 10px;
+  /*position: relative;*/
 }
+.main .item .part3 .clock .tf label, .main .item .part3 .clock .tf input{
+  cursor: pointer;
+}
+/*.main .item .part3 .clock .tf.am{  
+  top: 5px;
+}
+.main .item .part3 .clock .tf.pm{  
+  top: 0px;
+}*/
+
 
 .main .item .part1 .title {
 	font-size: 24px;
