@@ -60,6 +60,9 @@ angular.module('timezoneApp').controller('mainController', [
             minute:  moment(timezone.Date, timeFormat).format('mm'),
             a:  moment(timezone.Date, timeFormat).format('A')
         }
+        if($scope.timeformat === '24hr'){
+            timezone.editObject.hour = moment(timezone.Date, timeFormat).format('H');
+        }
     }
     $scope.save = function(timezone){
         timezone.edit = false;
@@ -68,7 +71,10 @@ angular.module('timezoneApp').controller('mainController', [
     constructor();
 
     var timeChanged = function(timezone){
-        var hour = timezone.editObject.hour - moment(timezone.Date, timeFormat).format('h');
+        var hour = timezone.editObject.hour%12 - moment(timezone.Date, timeFormat).format('h');
+        if($scope.timeformat === '24hr'){
+            hour = timezone.editObject.hour%24 - moment(timezone.Date, timeFormat).format('H');
+        }
         var minute = timezone.editObject.minute - moment(timezone.Date, timeFormat).format('mm');
         var timeformat = timezone.editObject.a;
 
