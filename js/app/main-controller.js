@@ -16,13 +16,14 @@ angular.module('timezoneApp').controller('mainController', [
                         if(item.Id){
                             item.Date = moment().utc().add('hours', item.Offset).format(timeFormat);
                             item.Display = moment().utc().add('hours', item.Offset).format('h:mm A');
+                            item.edit = false;
                             $scope.selectedTimezones.push(item);
                         }
                     });                    
                 }
                 $scope.selected = null;
             });
-    },
+    };
 
     $scope.storage = storageService;
     $scope.$watch('storage.data', function() {
@@ -45,10 +46,10 @@ angular.module('timezoneApp').controller('mainController', [
             return item.Id === timezone.Id;
         });
         storageService.remove(timezone);
-    }
+    };
     $scope.getTimeZone = function(searchTerm) {
         return searchService.dataSearch(searchTerm);
-    }
+    };
     $scope.edit = function(timezone){
         _.each($scope.selectedTimezones, function(item){
             item.edit = false;
@@ -59,15 +60,20 @@ angular.module('timezoneApp').controller('mainController', [
             hour:  moment(timezone.Date, timeFormat).format('h'),
             minute:  moment(timezone.Date, timeFormat).format('mm'),
             a:  moment(timezone.Date, timeFormat).format('A')
-        }
+        };
         if($scope.timeformat === '24hr'){
             timezone.editObject.hour = moment(timezone.Date, timeFormat).format('H');
         }
-    }
+    };
     $scope.save = function(timezone){
         timezone.edit = false;
         timeChanged(timezone);         
-    }
+    };
+
+    $scope.cancel = function(timezone){
+        timezone.editObject = {};
+        timezone.edit = false;
+    };
     constructor();
 
     var timeChanged = function(timezone){
@@ -76,17 +82,21 @@ angular.module('timezoneApp').controller('mainController', [
             hour = timezone.editObject.hour%24 - moment(timezone.Date, timeFormat).format('H');
         }
         var minute = timezone.editObject.minute - moment(timezone.Date, timeFormat).format('mm');
+        var timeformatInitial = moment(timezone.Date, timeFormat).format('A');
         var timeformat = timezone.editObject.a;
-
-        var utcWithUpdatedHourAndMinutes = moment().utc().add('hours', hour).add('minutes', minute);
-        if(moment(timezone.Date, timeFormat).format('A').toLocaleLowerCase() != timezone.editObject.a.toLocaleLowerCase()){
-            utcWithUpdatedHourAndMinutes = utcWithUpdatedHourAndMinutes.add('hours', 12);
+        var diffHour = 0;
+        if($scope.timeformat === 'ampm' && timeformatInitial !== timeformat){
+            diffHour = timeformatInitial === 'AM' ? 12 : -12;
         }
+        $scope.selectedTimezones[0].Date = moment($scope.selectedTimezones[0].Date, timeFormat).add('hours', hour+diffHour).add('minutes', minute).format(timeFormat);
+        $scope.selectedTimezones[0].Display = moment($scope.selectedTimezones[0].Date, timeFormat).format('h:mm A');
 
         _.each($scope.selectedTimezones, function(item, index){
-            item.Date = moment(utcWithUpdatedHourAndMinutes).add('hours', item.Offset).format(timeFormat);
-            item.Display = moment(item.Date, timeFormat).format('h:mm A');
-        })
+            if(index !== 0){
+                item.Date = moment($scope.selectedTimezones[0].Date, timeFormat).add('hours', item.Offset).format(timeFormat);
+                item.Display = moment(item.Date, timeFormat).format('h:mm A');
+            }
+        });
         timeFormatChanged();
     };
 
@@ -98,6 +108,6 @@ angular.module('timezoneApp').controller('mainController', [
 
         _.each($scope.selectedTimezones, function(item, index){
             item.Display = moment(item.Date, timeFormat).format(newTimeFormat);
-        })
+        });
     }
 }]);

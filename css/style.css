@@ -65,13 +65,34 @@ input:hover{outline:none;}
 .main .item .part3 .clock .tf label, .main .item .part3 .clock .tf input{
   cursor: pointer;
 }
-/*.main .item .part3 .clock .tf.am{  
-  top: 5px;
+.main .item .part3 .clock .unit-ampm
+{
+    width: 60px;
+    padding: 10px 5px;
+    font-family: 'Montserrat', Arial;
+    font-size: 16px;
+    text-align: center;
+    color: #777;
+    position: relative;
 }
-.main .item .part3 .clock .tf.pm{  
-  top: 0px;
-}*/
 
+.main .item .part3 .clock .unit-ampm span{
+    cursor: pointer;
+}
+
+.main .item .part3 .clock .unit-ampm .am{
+    position: absolute;;
+    top: -2px;
+}
+
+.main .item .part3 .clock .unit-ampm .pm{
+    position: inherit;;
+    top: 10px;
+}
+
+.main .item .part3 .clock .active{
+    color: #000 !important;
+}
 
 .main .item .part1 .title {
 	font-size: 24px;
