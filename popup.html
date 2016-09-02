@@ -18,8 +18,7 @@
 				<span class="part1">
 					<span class="title">{{item.Abbreviation}}</span>
 					<span class="desc">{{item.Name}}</span>	
-					<span class="desc">UTC {{item.Offset}}</span>
-					<span ng-click="remove(item);" class="delete" ng-if="$index != 0">remove</span>
+					<span class="desc">UTC {{item.Offset}}</span>					
 				</span>
 				<span class="part3">
 					<span ng-hide="item.edit == true" class="time">{{item.Display}}</span>
@@ -35,7 +34,8 @@
                             </span>
 						</span>
 					</span>
-					<span ng-show="!item.edit || item.edit == false" class="edit" ng-click="edit(item)">edit</span>
+					<span ng-show="!item.edit || item.edit == false" class="edit" ng-click="edit(item)"><img src="/icons/edit.png" title="edit time ?" /></span>
+					<span ng-click="remove(item);" class="delete" ng-if="$index != 0"><img src="/icons/delete.png" title="remove this timezone ?" /></span>
 					<span ng-show="item.edit == true" class="edit" ng-click="save(item)">save</span>
 					<span ng-show="item.edit == true" class="edit" ng-click="cancel(item)">cancel</span>
 				</span>				

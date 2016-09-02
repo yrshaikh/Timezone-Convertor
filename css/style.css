@@ -123,6 +123,15 @@ input:hover{outline:none;}
   cursor: pointer;
 }
 
+.main .item img{
+    opacity: 0.5;
+}
+
+.main .item img:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
 .head {
 	background:#2F2F2F;
 	position: relative;

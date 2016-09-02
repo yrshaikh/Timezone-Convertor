@@ -9,7 +9,5 @@
    "name": "Timezone Convertor",
    "permissions": [ "storage", "tabs", "http://*/*", "https://*/*" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "1.5",
-   "authors": [{"name": "Ali Rizvi", "email": "example@gmail.com"}, {"name": "Yasser R Shaikh", "email": "yrshaikh.mail@gmail.com"}],
-   "homepage_url": "https://github.com/yrshaikh/Timezone-Convertor",
+   "version": "1.7"
 }
