@@ -6,15 +6,15 @@ angular.module('timezoneApp').service('searchService', function () {
     this.dataSearch = function(query) {
         var queryUpper = query.toUpperCase();
 
-        var filterResult = $.grep(timezones, function (v) {
-            return v.Abbreviation.indexOf(queryUpper) != -1 ||
-                v.Name.toUpperCase().indexOf(queryUpper) != -1;
+        var filterResult = _this.grep(timezones, function (v) {
+            if(v.Abbreviation.indexOf(queryUpper) != -1 || v.Name.toUpperCase().indexOf(queryUpper) != -1)
+                return v;
         });
 
-        var cityFilterResult = $.grep(cities, function (v) {
-            return v.city.toUpperCase().indexOf(queryUpper) != -1 ||
-                v.admin.toUpperCase().indexOf(queryUpper) != -1 ||
-                v.country.toUpperCase().indexOf(queryUpper) != -1;
+        var cityFilterResult = _this.grep(cities, function (v) {
+            if(v.city.toUpperCase().indexOf(queryUpper) != -1 || v.admin.toUpperCase().indexOf(queryUpper) != -1 ||
+                v.country.toUpperCase().indexOf(queryUpper) != -1)
+                return v;
         });
 
         cityFilterResult.sort(function(a,b) {return (a.population > b.population) ? -1 : ((b.population > a.population) ? 1 : 0);} );
@@ -36,7 +36,21 @@ angular.module('timezoneApp').service('searchService', function () {
         });
 
         return filterResult.splice(0, 5);
-    }
+    };
+
+    this.grep = function(items, callback) {
+        var filtered = [],
+            len = items.length,
+            i = 0;
+        for (i; i < len; i++) {
+            var item = items[i];
+            var cond = callback(item);
+            if (cond) {
+                filtered.push(item);
+            }
+        }
+        return filtered;
+    };
 
     this.indexOfData = function(abbr, name, query) {
         var index = 100;
