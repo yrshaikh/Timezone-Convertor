@@ -1,25 +1,35 @@
 angular.module('timezoneApp').controller('mainController', [
     "$scope", "storageService", "searchService", function ($scope, storageService, searchService) {
     var timeFormat = 'MMMM Do YYYY, h:mm:ss a';
-    constructor  = function(){
-        $scope.timeformat='ampm';
+    constructor  = function() {
         storageService.get()
-            .then(function(data){
-                var previouslyAddedTimezones = data.timezone;
+            .then(function (data) {
+                if(_.isEmpty(data))
+                    data = { timezoneData:{} };
+                $scope.timeformat= data.timezoneData.timeformat || 'ampm';
+                var previouslyAddedTimezones = data.timezoneData.timezone;
                 $scope.selectedTimezones = [];
                 var utcDate = moment().utc().format(timeFormat);
                 var utcDisplay = moment().utc().format('h:mm A');
-                $scope.utc = { Id: "utc", Abbreviation: "UTC", Name: "Universal Time Coordinated", Offset: 0, Date: utcDate, Display:  utcDisplay};
+                $scope.utc = {
+                    Id: "utc",
+                    Abbreviation: "UTC",
+                    Name: "Universal Time Coordinated",
+                    Offset: 0,
+                    Date: utcDate,
+                    Display: utcDisplay
+                };
                 $scope.selectedTimezones.push($scope.utc);
-                if(previouslyAddedTimezones){
-                    _.each(previouslyAddedTimezones, function(item){
-                        if(item.Id){
+                if (previouslyAddedTimezones) {
+                    var newTimeFormat = $scope.timeformat === 'ampm' ? 'h:mm A' : 'H:mm';
+                    _.each(previouslyAddedTimezones, function (item) {
+                        if (item.Id) {
                             item.Date = moment().utc().add('hours', item.Offset).format(timeFormat);
-                            item.Display = moment().utc().add('hours', item.Offset).format('h:mm A');
+                            item.Display = moment().utc().add('hours', item.Offset).format(newTimeFormat);
                             item.edit = false;
                             $scope.selectedTimezones.push(item);
                         }
-                    });                    
+                    });
                 }
                 $scope.selected = null;
             });
@@ -31,11 +41,13 @@ angular.module('timezoneApp').controller('mainController', [
     });
     $scope.$watch('timeformat', function() {
         timeFormatChanged();
+        storageService.setTimeFormat($scope.timeformat);
     });
     $scope.$watch('selected', function(newValue, oldValue) {
         if(newValue && newValue["Abbreviation"]){
+            var newTimeFormat = $scope.timeformat === 'ampm' ? 'h:mm A' : 'H:mm';
             newValue.Date = moment().utc().add('hours', newValue.Offset).format(timeFormat);
-            newValue.Display = moment().utc().add('hours', newValue.Offset).format('h:mm A');
+            newValue.Display = moment().utc().add('hours', newValue.Offset).format(newTimeFormat);
             storageService.set(newValue);
             $scope.selectedTimezones.push(newValue);
             $scope.selected = null;
@@ -101,10 +113,7 @@ angular.module('timezoneApp').controller('mainController', [
     };
 
     var timeFormatChanged = function(){
-        if($scope.timeformat === 'ampm')
-            var newTimeFormat = 'h:mm A';
-        else
-            var newTimeFormat = 'H:mm';
+        var newTimeFormat = $scope.timeformat === 'ampm' ? 'h:mm A' : 'H:mm';
 
         _.each($scope.selectedTimezones, function(item, index){
             item.Display = moment(item.Date, timeFormat).format(newTimeFormat);

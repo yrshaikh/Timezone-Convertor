@@ -5,7 +5,8 @@ body {
 	width:500px;
 	height: auto;
 	padding: 0px;
-  margin: 0px;
+    margin: 0px;
+    overflow-x: hidden;
 }
 
 body, #search {font-family: 'Montserrat', Arial;}
