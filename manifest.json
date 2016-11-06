@@ -7,6 +7,9 @@
    "description": "The all in 1, timezone plugin you had been waiting for!",   
    "manifest_version": 2,
    "name": "Timezone Convertor",
+   "icons": { 
+      "128": "icons/logo.png" 
+   },
    "permissions": [ "storage", "tabs", "http://*/*", "https://*/*" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "1.9"
